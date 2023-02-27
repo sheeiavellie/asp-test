@@ -29,15 +29,18 @@ namespace AspTest.Domain.Repositories
 
         public void Insert(UniqueOfferProperties property)
         {
-            using (var transaction = context.Database.BeginTransaction())
+            if (context.OffersCustomProperties.Single(x => x.ID == property.ID) == null)
             {
-                Console.WriteLine("Inserting offer to OfferBase");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersBase ON");
-                context.OffersCustomProperties.Add(property);
-                context.SaveChanges();
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersBase OFF");
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    Console.WriteLine("Inserting offer to OfferBase");
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersCustomProperties ON");
+                    context.OffersCustomProperties.Add(property);
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersCustomProperties OFF");
 
-                transaction.Commit();
+                    transaction.Commit();
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using AspTest.Domain.Repositories;
 using AspTest.Domain.Offer;
 using AspTest.Utilities.Converters.DtoToModelConverter;
+using AspTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<AppDataBaseContext>(options =>
 builder.Services.AddSingleton<IXmlToModelConverter<List<OfferModel>>, XmlToOffersConverter>();
 builder.Services.AddSingleton<IDtoToModelConverter<OfferDto, OfferModel>, OfferDtoToOfferModelConverter>();
 
+builder.Services.AddScoped<IOfferDataService, OfferDataService>();
 builder.Services.AddScoped<IRepository<Offer>, OffersRepository>();
 builder.Services.AddScoped<IRepository<UniqueOfferProperties>, UniqueOffersPropertiesRepository>();
 

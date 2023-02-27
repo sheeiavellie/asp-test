@@ -39,7 +39,15 @@ namespace AspTest.Services
 
         public void SaveOffer(OfferModel offer)
         {
-            
+            var _offerdto = _dtoToModelConverter.ConverBack(offer);
+            var _offer = _offerdto.offer;
+            var _properties = _offerdto.properties;
+
+            _offersRepository.Insert(_offer);
+            foreach(var up in _properties)
+            {
+                _offersPropertiesRepository.Insert(up);
+            }
         }
     }
 }

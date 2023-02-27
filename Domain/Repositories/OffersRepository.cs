@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspTest.Domain.Repositories
@@ -24,16 +25,19 @@ namespace AspTest.Domain.Repositories
         [HttpPost]
         public void Insert(Offer.Offer offer)
         {
-            using(var transaction = context.Database.BeginTransaction())
+            if(context.OffersBase.Single(x => x.ID == offer.ID) == null)
             {
-                Console.WriteLine("Inserting offer to OfferBase");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersBase ON");
-                context.OffersBase.Add(offer);
-                context.SaveChanges();
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersBase OFF");
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    Console.WriteLine("Inserting offer to OfferBase");
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersBase ON");
+                    context.OffersBase.Add(offer);
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OffersBase OFF");
 
-                transaction.Commit();
-            }            
+                    transaction.Commit();
+                }
+            }                
         }
 
         public IQueryable<Offer.Offer> GetAll()

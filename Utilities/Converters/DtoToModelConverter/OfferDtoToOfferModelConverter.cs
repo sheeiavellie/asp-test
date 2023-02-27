@@ -7,7 +7,7 @@ namespace AspTest.Utilities.Converters.DtoToModelConverter
     {
         public OfferDto ConverBack(OfferModel model) //следовало бы написать отдельный конвертер
         {
-            var x = new OfferDto();
+            var counter = 0;
 
             return new OfferDto
             {
@@ -25,7 +25,7 @@ namespace AspTest.Utilities.Converters.DtoToModelConverter
                     .Select(p => new UniqueOfferProperties {
                         //т.к. категорий мало, то в силу удобства можно записывать id так.
                         //Но это не верный способ и не рабочий способ на большом масштабе
-                        ID = model.ID * 1000 + model.categoryID, 
+                        ID = model.ID * 1000 + ++counter, 
                         categoryID = model.categoryID,
                         offerID = model.ID,
                         propertyName = p.Key,

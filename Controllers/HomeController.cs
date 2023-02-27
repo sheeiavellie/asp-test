@@ -3,6 +3,7 @@ using AspTest.Models;
 using AspTest.Models.Offer;
 using AspTest.Models.Utilities.Converters.StringModelConverter;
 using AspTest.Models.Utilities.Converters.XmlModelConverter;
+using AspTest.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net;
@@ -15,14 +16,22 @@ namespace AspTest.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IXmlToModelConverter<List<Models.Offer.OfferModel>> _xmlConverter;
+        private readonly IOfferDataService _offerDataService;
+
+        private List<OfferModel> _offers;
 
         public HomeController(
             ILogger<HomeController> logger,
-            IXmlToModelConverter<List<Models.Offer.OfferModel>> xmlConverter
+            IXmlToModelConverter<List<Models.Offer.OfferModel>> xmlConverter,
+            IOfferDataService offerDataService
         )
         {
             _logger = logger;
             _xmlConverter = xmlConverter;
+            _offerDataService = offerDataService;
+
+            _offers = _xmlConverter.Convert(GetXml().Result);
+            _offerDataService.SaveOffer(_offers.Single(x => x.ID == 12344));
         }
         public IActionResult Index()
         {
