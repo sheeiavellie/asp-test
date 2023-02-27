@@ -14,23 +14,18 @@ namespace AspTest.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IXmlModelConverter<List<Models.Offer.OfferModel>> _xmlConverter;
-        private readonly IOffersRepository _offersRepository;
+        private readonly IXmlToModelConverter<List<Models.Offer.OfferModel>> _xmlConverter;
 
         public HomeController(
             ILogger<HomeController> logger,
-            IXmlModelConverter<List<Models.Offer.OfferModel>> xmlConverter,
-            IOffersRepository offersRepository
+            IXmlToModelConverter<List<Models.Offer.OfferModel>> xmlConverter
         )
         {
             _logger = logger;
             _xmlConverter = xmlConverter;
-            _offersRepository = offersRepository;
         }
         public IActionResult Index()
         {
-            var x = _offersRepository.GetOfferById(2);
-            var y = _xmlConverter.Convert(GetXml().Result);
             return View();
         }
 

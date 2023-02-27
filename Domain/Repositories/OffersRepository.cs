@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AspTest.Domain.Repositories
 {
-    public class OffersRepository : IOffersRepository
+    public class OffersRepository : IRepository<Offer.Offer>
     {
         private readonly AppDataBaseContext context;
 
@@ -12,7 +12,7 @@ namespace AspTest.Domain.Repositories
             this.context = context;
         }
 
-        public Offer.Offer GetOfferById(int id)
+        public Offer.Offer GetById(int id)
         {
             return context.OffersBase.FirstOrDefault(x => x.ID == id);
         }
@@ -20,11 +20,6 @@ namespace AspTest.Domain.Repositories
         public void Delete(Offer.Offer offer)
         {
             context.OffersBase.Remove(offer);
-        }
-
-        public void DeleteById(int id)
-        {
-            context.OffersBase.Remove(context.OffersBase.Single(x => x.ID == id));
         }
         [HttpPost]
         public void Insert(Offer.Offer offer)

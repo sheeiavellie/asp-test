@@ -7,6 +7,7 @@ namespace AspTest.Domain.Offer
         [Key]
         public int ID { get; set; }
         public int categoryID { get; set; }
+        public int offerID { get; set; }
 
         public string propertyName { get; set; }
         public string propertyValue { get; set; }

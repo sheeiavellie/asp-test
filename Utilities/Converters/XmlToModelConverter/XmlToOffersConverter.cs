@@ -3,8 +3,8 @@ using System.Xml;
 
 namespace AspTest.Models.Utilities.Converters.XmlModelConverter
 {
-    //probaly not good to name like that converter that works only with yml_catalog
-    public class XmlToOffersConverter : IXmlModelConverter<List<Offer.OfferModel>> 
+    //в рамках большого приложения подобная имплементация конвертера не хороша
+    public class XmlToOffersConverter : IXmlToModelConverter<List<Offer.OfferModel>> 
     {
         public List<Offer.OfferModel> Convert(XmlDocument xmlDocument)
         {
