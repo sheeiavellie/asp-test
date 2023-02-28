@@ -22,7 +22,7 @@ namespace AspTest.Controllers
 
         public HomeController(
             ILogger<HomeController> logger,
-            IXmlToModelConverter<List<Models.Offer.OfferModel>> xmlConverter,
+            IXmlToModelConverter<List<OfferModel>> xmlConverter,
             IOfferDataService offerDataService
         )
         {
@@ -35,7 +35,7 @@ namespace AspTest.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_offers.Single(x => x.ID == 12344));
         }
 
         public async Task<XmlDocument> GetXml()
@@ -56,12 +56,6 @@ namespace AspTest.Controllers
                 return xmlDoc;
             }     
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

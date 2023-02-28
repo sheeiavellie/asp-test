@@ -15,4 +15,80 @@ html {
 
 body {
   margin-bottom: 60px;
+  background: #68A0B0;
+}
+
+.footer-color {
+    background: #426670;
+    height: 8vh;
+}
+
+.footer-font {
+    color: #FBFAF5;
+    text-align: center;
+}
+
+.navbar-color {
+    background: #FCE47C;
+    height: 8vh;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+}
+
+.card-p {
+    width: 40vh;
+    
+    border-radius: 1.25rem;
+}
+
+.img-p {
+    max-width: 20vh;
+    max-height: 20vh;
+    object-fit: contain;
+    align-self: center;
+    margin: 1vh;
+}
+
+.cut-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn-check:checked + .btn-outline-secondary {
+    max-height: fit-content;
+    background: none;
+    color: #212529;
+    border: 0px solid transparent;
+    display: inline-block;
+}
+
+.p-p {
+    max-height: 10vh;
+    max-width: 35vh;
+    text-align: justify;
+    margin-inline: auto;
+    margin-bottom: 1vh;
+}
+
+.btn-outline-secondary.p-p {
+    border: 0px solid transparent;
+    color: #212529;
+}
+.btn-outline-secondary:hover.p-p {
+    background: none;
+    color: #212529;
+}
+
+.a-p {
+    text-decoration: none;
+    color: #212529;
+}
+
+a:hover.a-p {
+    color: #212529;
 }

@@ -1,8 +1,25 @@
-﻿@{
+﻿@using AspTest.Models.Offer
+@model OfferModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center cards">
+    <!--Т.к. нужно отобразить один оффер, то верстка заточена только под него-->
+    <!--Для реальной задачи необходимо как-то отдельно формировать название и, возможно другие свойства, т.к. для офферов разного типа они будут сроиться по разному-->
+    <div class="card card-p">
+        <!--Юрл из документа не работает, поэтому тут будет мем -->
+        <img src="https://memepedia.ru/wp-content/uploads/2023/02/she-was-a-girl-he-was-a-boy-mem-1.jpg" class="card-img-top img-p" alt="Offer Image">
+        <div class="card-body">
+            <h5 class="card-title">@Model.categoryProperties["artist"] - @Model.categoryProperties["title"]</h5>
+            <div>
+                <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                <label class="btn btn-outline-secondary card-text cut-text p-p" for="btn-check">
+                    @Model.description
+                </label>                
+                <!--Также следует сделать правильное отображение цены с валютой. Очевидно что где-то можно не показывать ее, а где-то, например, менять id доллара на $-->
+                <a href="@Model.url" class="a-p">@Model.price.ToString() @(Model.currencyID == "RUR" ? "₽" : Model.currencyID)</a>
+            </div>            
+        </div>
+    </div>
 </div>
